@@ -1,0 +1,45 @@
+.model small
+.stack 100h
+.data 
+msg db 'enter 1st number:$'
+msg1 db 0dh,0ah,'enter 2nd number:$'
+msg2 db 0dh,0ah,'result:$'
+.code
+main proc
+    MOV AX,@DATA
+    MOV DS,AX
+    
+    LEA DX,MSG
+    MOV AH,9
+    INT 21H
+    
+    MOV AH,1
+    INT 21H
+    
+    and al,0fh
+    mov bl,al
+  
+    LEA DX,MSG1
+    MOV AH,9
+    INT 21H
+    
+    MOV AH,1
+    INT 21H
+    
+    and al,0fh
+    mov bh,al
+    
+    add bh,bl
+     
+    LEA DX,MSG2
+    MOV AH,9
+    INT 21H
+    
+    MOV DL,BH
+    
+    or dl,30h
+    
+    mov ah,2
+    int 21h
+    main endp
+end main

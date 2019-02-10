@@ -1,0 +1,44 @@
+.MODEL SMALL
+.STACK 100H
+.DATA
+MSG1 DB 'ENTER 1ST NUM$'
+MSG2 DB 0DH,0AH, 'ENTER 2ND NUM$'
+MSG3 DB 0DH,0AH, 'RESULT:$'
+.CODE
+MAIN PROC
+    MOV AX,@DATA
+    MOV DS,AX
+    
+    LEA DX,MSG1
+    MOV AH,9
+    INT 21H
+    
+    MOV AH,1
+    INT 21H
+    
+    SUB AL,48
+    MOV BL,AL
+    
+    LEA DX,MSG2
+    MOV AH,9
+    INT 21H
+    
+    MOV AH,1
+    INT 21H
+    
+    SUB AL,48
+    MOV BH,AL
+    
+    ADD BH,BL
+    
+    LEA DX,MSG3
+    MOV AH,9
+    INT 21H
+    
+    MOV DL,BH
+    
+    ADD DL,48
+    MOV AH,2
+    INT 21H
+    MAIN ENDP
+END MAIN

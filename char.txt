@@ -1,0 +1,68 @@
+.model small
+.stack 100h
+.data 
+msg1 db 'enter a character:$'
+msg2 db 0dh,0ah, 'this is small$'
+msg3 db 0dh,0ah, 'this is capital$' 
+msg4 db 0dh,0ah, 'this is numaric$'
+msg5 db 0dh,0ah, 'this is other$'
+.code
+main proc
+    mov ax,@data
+    mov ds,ax
+    
+    LEA DX,MSG1
+    MOV AH,9
+    INT 21H
+    MOV AH,1
+    INT 21H
+    
+  
+   cmp al,122
+   jnle end_if
+   
+   cmp al,97
+   jnge end_if
+   
+   lea dx,msg2
+   mov ah,9
+   int 21h
+   jmp r
+   
+   end_if:
+   cmp al,90
+   jnle else_if
+   
+   cmp al,65
+   jnge else_if
+   
+   lea dx,msg3
+   mov ah,9
+   int 21h
+   jmp r
+   
+   else_if:
+   cmp al,58
+   
+   jnle l
+   cmp al,48
+   jnge l
+   
+   lea dx,msg4
+   mov ah,9
+   int 21h
+   jmp r
+   
+     l:
+   lea dx,msg5
+   mov ah,9
+   int 21h
+   
+   r:
+   
+   
+   
+    main endp
+end main
+    
+    
